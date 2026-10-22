@@ -6,8 +6,15 @@
     <title>AntFarm</title>
     <link rel="icon" href="TemplateData/icon.png">
     <style>
-      html, body { margin: 0; height: 100%; overflow: hidden; background: #12141a; }
-      #unity-canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; background: #12141a; outline: none; }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #12141a; overscroll-behavior: none; }
+      /* 손가락 끌기·핀치를 브라우저(쪽 굴리기·확대·당겨서 새로고침)가 가져가지 않고 앱이 받게 */
+      #unity-canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; background: #12141a; outline: none;
+                      touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+      /* 휴대폰을 세로로 들면: 앱처럼 가로 화면만 쓴다 */
+      #rotate { display: none; position: fixed; inset: 0; z-index: 10; background: #12141a; color: #e6eaf0; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+                font: 16px/1.5 system-ui, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; text-align: center; }
+      #rotate img { width: 72px; height: 72px; }
+      @media (orientation: portrait) and (max-width: 600px) { #rotate { display: flex; } }
       #loading { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
                  color: #e6eaf0; font: 15px/1.5 system-ui, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
       #loading img { width: 96px; height: 96px; }
@@ -22,11 +29,20 @@
     <canvas id="unity-canvas" tabindex="-1"></canvas>
     <div id="loading"><img src="TemplateData/icon.png" alt=""><div>개미 수조를 불러오는 중…</div><div id="bar"><div id="fill"></div></div></div>
     <div id="err"></div>
+    <div id="rotate"><img src="TemplateData/icon.png" alt=""><div>휴대폰을 가로로 돌려 주세요</div></div>
     <script src="Build/Web.loader.js"></script>
     <script>
       const canvas = document.getElementById("unity-canvas");
       const err = m => { document.getElementById("err").textContent = m; };
       canvas.addEventListener("contextmenu", e => e.preventDefault()); // 오른쪽 버튼으로 끌어 화면을 옮긴다
+      // 휴대폰: 화면을 누르면 전체 화면으로(주소 막대만큼 넓어진다) 하고 가로로 고정한다(되는 브라우저만, 아이폰 사파리는 안 된다)
+      if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+        canvas.addEventListener("touchend", () => {
+          const el = document.documentElement;
+          if (document.fullscreenElement || !el.requestFullscreen) return;
+          el.requestFullscreen({ navigationUI: "hide" }).then(() => screen.orientation?.lock?.("landscape")).catch(() => {});
+        });
+      }
       createUnityInstance(canvas, {
         dataUrl: "Build/Web.data.unityweb",
         frameworkUrl: "Build/Web.framework.js.unityweb",
