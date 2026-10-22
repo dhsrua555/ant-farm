@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+    <title>AntFarm</title>
+    <link rel="icon" href="TemplateData/icon.png">
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #12141a; }
+      #unity-canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; background: #12141a; outline: none; }
+      #loading { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+                 color: #e6eaf0; font: 15px/1.5 system-ui, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+      #loading img { width: 96px; height: 96px; }
+      #bar { width: min(320px, 70vw); height: 6px; border-radius: 3px; background: #2a2f36; overflow: hidden; }
+      #fill { width: 0; height: 100%; background: #f2ad40; transition: width .2s; }
+      #err { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: 80vw; padding: 10px 14px; border-radius: 6px;
+             background: #3a1d1d; color: #ffb4a8; font: 14px/1.5 system-ui, "Malgun Gothic", sans-serif; white-space: pre-wrap; }
+      #err:empty { display: none; }
+    </style>
+  </head>
+  <body>
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <div id="loading"><img src="TemplateData/icon.png" alt=""><div>개미 수조를 불러오는 중…</div><div id="bar"><div id="fill"></div></div></div>
+    <div id="err"></div>
+    <script src="Build/Web.loader.js"></script>
+    <script>
+      const canvas = document.getElementById("unity-canvas");
+      const err = m => { document.getElementById("err").textContent = m; };
+      canvas.addEventListener("contextmenu", e => e.preventDefault()); // 오른쪽 버튼으로 끌어 화면을 옮긴다
+      createUnityInstance(canvas, {
+        dataUrl: "Build/Web.data.unityweb",
+        frameworkUrl: "Build/Web.framework.js.unityweb",
+        codeUrl: "Build/Web.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "MyApps",
+        productName: "AntFarm",
+        productVersion: "1.0",
+        autoSyncPersistentDataPath: true, // 저장한 개미집이 브라우저(IndexedDB)에 남아 다음에 와도 보이게
+        showBanner: (msg, type) => { if (type === "error") err(msg); },
+      }, p => { document.getElementById("fill").style.width = 100 * p + "%"; })
+        .then(() => { document.getElementById("loading").remove(); canvas.focus(); })
+        .catch(err);
+    </script>
+  </body>
+</html>
