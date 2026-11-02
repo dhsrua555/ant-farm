@@ -7,7 +7,7 @@
 - 지온에 따라 휴면합니다.
 - 수조는 단층집 남향 창의 창턱에 놓여 있어 창밖으로 하루와 계절이 지나갑니다.
 
-**[웹에서 실행](https://dhsrua555.github.io/ant-farm/)** · **[내려받기 (Windows · Android)](https://github.com/dhsrua555/ant-farm/releases/latest)** · **[업데이트 기록](CHANGELOG.md)**
+**[웹에서 실행](https://dhsrua555.github.io/ant-farm/)** · **[내려받기 (Windows · Linux · Android)](https://github.com/dhsrua555/ant-farm/releases/latest)** · **[업데이트 기록](CHANGELOG.md)**
 
 ![흙 속 개미 둥지의 방과 굴을 그린 단면 그림](docs/banner.jpg)
 
@@ -64,6 +64,7 @@
 |---|---|
 | 웹 브라우저 | https://dhsrua555.github.io/ant-farm/ 을 엽니다. PC와 휴대폰·태블릿에서 모두 실행됩니다(휴대폰은 가로 화면). |
 | Windows | [Releases](https://github.com/dhsrua555/ant-farm/releases/latest)에서 `AntFarm-v…-Windows.zip`을 받아 압축을 풀고 `AntFarm/AntFarm.exe`를 실행합니다. |
+| Linux | [Releases](https://github.com/dhsrua555/ant-farm/releases/latest)에서 `AntFarm-v…-Linux.tar.gz`를 받아 `tar -xzf AntFarm-v…-Linux.tar.gz`로 풀고 `AntFarm/AntFarm.x86_64`를 실행합니다. x86-64용입니다. 저장한 개미집은 `~/.config/unity3d/MyApps/AntFarm`에 남습니다. |
 | Android | [Releases](https://github.com/dhsrua555/ant-farm/releases/latest)에서 `AntFarm-v…-Android.apk`를 휴대폰에서 받아 설치합니다. 처음에는 "출처를 알 수 없는 앱" 설치를 허용해야 합니다. 이전 판 위에 덮어 설치됩니다. |
 
 웹판에서 저장한 개미집은 해당 브라우저 안에만 남습니다.
@@ -112,7 +113,7 @@
 
 ## 이 저장소
 
-이 저장소에는 웹판 빌드 파일(GitHub Pages), 이 문서, 업데이트 기록만 있습니다. Windows·Android 설치 파일은 Releases에 올립니다. Unity 6으로 만들었습니다.
+이 저장소에는 웹판 빌드 파일(GitHub Pages), 이 문서, 업데이트 기록만 있습니다. Windows·Linux·Android 설치 파일은 Releases에 올립니다. Unity 6으로 만들었습니다.
 
 ### 사용한 자원
 - 글꼴: [Pretendard](https://github.com/orioncactus/pretendard)(SIL Open Font License 1.1)
