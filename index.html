@@ -30,7 +30,7 @@
     <div id="loading"><img src="TemplateData/icon.png" alt=""><div>개미 수조를 불러오는 중…</div><div id="bar"><div id="fill"></div></div></div>
     <div id="err"></div>
     <div id="rotate"><img src="TemplateData/icon.png" alt=""><div>휴대폰을 가로로 돌려 주세요</div></div>
-    <script src="Build/e6dda3e90212cc83fb0bfc4fbce973a1.loader.js"></script>
+    <script src="Build/c699c8e54e27712efafc2c0dd16326cc.loader.js"></script>
     <script>
       const canvas = document.getElementById("unity-canvas");
       const err = m => { document.getElementById("err").textContent = m; };
@@ -44,16 +44,16 @@
         });
       }
       const start = () => createUnityInstance(canvas, {
-        dataUrl: "Build/1e43e9a08e38a79cd1a441f83f9ecc9b.data.unityweb",
+        dataUrl: "Build/a2d48e27092d8b3dcd03147b823912e5.data.unityweb",
         frameworkUrl: "Build/eae07d812b99df0bd34d2fd905064492.framework.js.unityweb",
-        codeUrl: "Build/6cdf436039dc82b6a9a71227486ac53d.wasm.unityweb",
+        codeUrl: "Build/3d6ddc14b697e41a3c6f060301008f81.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "MyApps",
         productName: "AntFarm",
-        productVersion: "1.6.0",
+        productVersion: "1.7.0",
         autoSyncPersistentDataPath: true, // 저장한 개미집이 브라우저(IndexedDB)에 남아 다음에 와도 보이게
         // 파일 이름이 내용 해시라 같은 이름이면 내용도 같다: 데이터를 매번 서버에 다시 묻지 않는다
-        cacheControl: url => url.endsWith("1e43e9a08e38a79cd1a441f83f9ecc9b.data.unityweb") ? "immutable" : "no-store",
+        cacheControl: url => url.endsWith("a2d48e27092d8b3dcd03147b823912e5.data.unityweb") ? "immutable" : "no-store",
         showBanner: (msg, type) => { if (type === "error") err(msg); },
       }, p => { document.getElementById("fill").style.width = 100 * p + "%"; })
         .then(u => {
